@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: patient-LB-service
+  name: patient-lb-service
   namespace: dynamo
   labels: #PODS
     app: patient-app
