@@ -1,0 +1,52 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool: 
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build_JAR
+  jobs:
+  - job: job1
+    steps:
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    - bash: mvn --version
+    - bash: java --version
+    - bash: ls $(System.DefaultWorkingDirectory)
+    - script: "cd ./patient_app && mvn clean package"
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/patient_app/target/'
+        Contents: 'patient_app-0.0.1-SNAPSHOT.jar'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
+        preserveTimestamp: true
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/patient_app/'
+        Contents: 'Dockerfile'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
+        preserveTimestamp: true
+      
+    - bash: ls $(Build.ArtifactStagingDirectory)
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-hub-registry'
+        repository: 'iamsandeep82/patient-app'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.ArtifactStagingDirectory)/Dockerfile'
+    
+

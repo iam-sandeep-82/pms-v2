@@ -1,0 +1,8 @@
+com\wipro\patient_app\service\PatientService.class
+com\wipro\patient_app\entity\PatientEntity.class
+com\wipro\patient_app\repos\PatientRepos.class
+com\wipro\patient_app\entity\ServiceEntity.class
+com\wipro\patient_app\controller\Controller.class
+com\wipro\patient_app\entity\EnvEntity.class
+com\wipro\patient_app\entity\EnvValues.class
+com\wipro\patient_app\proxy\OpenFeignProxy.class
