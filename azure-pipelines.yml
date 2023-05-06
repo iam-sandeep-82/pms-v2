@@ -165,9 +165,9 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'MIRACLE-K8S-CONNECT'
         namespace: 'dynamo'
-        manifests: '$(Build.SourcesDirectory)/patient-deploy.yaml'
-        # containers: 'iamsandeep82/patient-app:$(tag)'
-        containers: 'iamsandeep82/patient-app:beta-199'
+        manifests: '$(Build.SourcesDirectory)/service-deploy.yaml'
+        containers: 'iamsandeep82/patient-app:$(tag)'
+        # containers: 'iamsandeep82/service-app:beta-199'
 
   - job: PatientDeployment
     displayName: Build-Patient-Deployment
@@ -180,6 +180,6 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'MIRACLE-K8S-CONNECT'
         namespace: 'dynamo'
-        manifests: '$(Build.SourcesDirectory)/service-deploy.yaml'
-        # containers: 'iamsandeep82/service-app:$(tag)'
-        containers: 'iamsandeep82/service-app:beta-199'
+        manifests: '$(Build.SourcesDirectory)/patient-deploy.yaml'
+        containers: 'iamsandeep82/service-app:$(tag)'
+        # containers: 'iamsandeep82/patient-app:beta-199'
