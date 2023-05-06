@@ -14,141 +14,141 @@ variables:
   artifact_service: 'service-app'
 
 stages:
-# # BUILD PATIENT-JAR PACKAGE
-# - stage: BUILD_PATIENT_JAR_PACKAGE
-#   displayName: Build patient-app jar-package_$(tag)
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
-#     - bash: ls $(Build.SourcesDirectory)/patient_app
-#     - task: JavaToolInstaller@0
-#       inputs:
-#         versionSpec: '17'
-#         jdkArchitectureOption: 'x64'
-#         jdkSourceOption: 'PreInstalled'
-#     - task: Maven@4
-#       inputs:
-#         mavenPomFile: '$(Build.SourcesDirectory)/patient_app'
-#         publishJUnitResults: false
-#         javaHomeOption: 'JDKVersion'
-#         jdkVersionOption: '1.17'
-#         mavenVersionOption: 'Default'
-#         mavenAuthenticateFeed: false
-#         effectivePomSkip: false
-#         sonarQubeRunAnalysis: false
+# BUILD PATIENT-JAR PACKAGE
+- stage: BUILD_PATIENT_JAR_PACKAGE
+  displayName: Build patient-app jar-package_$(tag)
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - bash: ls $(Build.SourcesDirectory)/patient_app
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    - task: Maven@4
+      inputs:
+        mavenPomFile: '$(Build.SourcesDirectory)/patient_app'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-#     - task: CopyFiles@2
-#       inputs:
-#         SourceFolder: '$(Build.SourcesDirectory)/patient_app/target'
-#         Contents: '*.jar'
-#         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/patient_app/target'
+        Contents: '*.jar'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-#     - task: CopyPublishBuildArtifacts@1
-#       inputs:
-#         CopyRoot: '$(Build.ArtifactStagingDirectory)'
-#         Contents: '*.jar'
-#         ArtifactName: '$(artifact_patient)'
-#         ArtifactType: 'Container'
+    - task: CopyPublishBuildArtifacts@1
+      inputs:
+        CopyRoot: '$(Build.ArtifactStagingDirectory)'
+        Contents: '*.jar'
+        ArtifactName: '$(artifact_patient)'
+        ArtifactType: 'Container'
 
-# # BUILD SERVICE-JAR PACKAGE      
-# - stage: BUILD_SERVICE_JAR_PACKAGE
-#   displayName: Build service-app jar-package_$(tag)
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
-#     - bash: ls $(Build.SourcesDirectory)/service_app
-#     - task: JavaToolInstaller@0
-#       inputs:
-#         versionSpec: '17'
-#         jdkArchitectureOption: 'x64'
-#         jdkSourceOption: 'PreInstalled'
-#     - task: Maven@4
-#       inputs:
-#         mavenPomFile: '$(Build.SourcesDirectory)/service_app'
-#         publishJUnitResults: false
-#         javaHomeOption: 'JDKVersion'
-#         jdkVersionOption: '1.17'
-#         mavenVersionOption: 'Default'
-#         mavenAuthenticateFeed: false
-#         effectivePomSkip: false
-#         sonarQubeRunAnalysis: false
+# BUILD SERVICE-JAR PACKAGE      
+- stage: BUILD_SERVICE_JAR_PACKAGE
+  displayName: Build service-app jar-package_$(tag)
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - bash: ls $(Build.SourcesDirectory)/service_app
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    - task: Maven@4
+      inputs:
+        mavenPomFile: '$(Build.SourcesDirectory)/service_app'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-#     - task: CopyFiles@2
-#       inputs:
-#         SourceFolder: '$(Build.SourcesDirectory)/service_app/target'
-#         Contents: '*.jar'
-#         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/service_app/target'
+        Contents: '*.jar'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-#     - task: CopyPublishBuildArtifacts@1
-#       inputs:
-#         CopyRoot: '$(Build.ArtifactStagingDirectory)'
-#         Contents: '*.jar'
-#         ArtifactName: '$(artifact_service)'
-#         ArtifactType: 'Container'
+    - task: CopyPublishBuildArtifacts@1
+      inputs:
+        CopyRoot: '$(Build.ArtifactStagingDirectory)'
+        Contents: '*.jar'
+        ArtifactName: '$(artifact_service)'
+        ArtifactType: 'Container'
 
 
-# # PATIENT-DOCKER-BUILD-PUSH
-# - stage: PATIENT_BUILD_PUSH_DOCKER_IMAGE
-#   displayName: Build-Patient-Docker-Image
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
+# PATIENT-DOCKER-BUILD-PUSH
+- stage: PATIENT_BUILD_PUSH_DOCKER_IMAGE
+  displayName: Build-Patient-Docker-Image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     
-#     - task: DownloadBuildArtifacts@1
-#       inputs:
-#         buildType: 'current'
-#         downloadType: 'single'
-#         artifactName: '$(artifact_patient)'
-#         itemPattern: '**'
-#         downloadPath: '$(Build.SourcesDirectory)/patient_app/'
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifact_patient)'
+        itemPattern: '**'
+        downloadPath: '$(Build.SourcesDirectory)/patient_app/'
     
-#     - bash: ls -R $(Build.SourcesDirectory)/patient_app
+    - bash: ls -R $(Build.SourcesDirectory)/patient_app
   
-#     - task: Docker@2
-#       inputs:
-#         containerRegistry: 'docker-hub-registry'
-#         repository: 'iamsandeep82/patient-app'
-#         command: 'buildAndPush'
-#         Dockerfile: '$(Build.SourcesDirectory)/patient_app/Dockerfile'
-#         tags: '$(tag)'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-hub-registry'
+        repository: 'iamsandeep82/patient-app'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/patient_app/Dockerfile'
+        tags: '$(tag)'
     
 
-# # SERVICE-DOCKER-BUILD-PUSH
-# - stage: SERVICE_BUILD_PUSH_DOCKER_IMAGE
-#   displayName: Build-Service-Docker-Image
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
+# SERVICE-DOCKER-BUILD-PUSH
+- stage: SERVICE_BUILD_PUSH_DOCKER_IMAGE
+  displayName: Build-Service-Docker-Image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     
-#     - task: DownloadBuildArtifacts@1
-#       inputs:
-#         buildType: 'current'
-#         downloadType: 'single'
-#         artifactName: '$(artifact_service)'
-#         itemPattern: '**'
-#         downloadPath: '$(Build.SourcesDirectory)/service_app/'
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifact_service)'
+        itemPattern: '**'
+        downloadPath: '$(Build.SourcesDirectory)/service_app/'
     
-#     - bash: ls -R $(Build.SourcesDirectory)/service_app
+    - bash: ls -R $(Build.SourcesDirectory)/service_app
   
-#     - task: Docker@2
-#       inputs:
-#         containerRegistry: 'docker-hub-registry'
-#         repository: 'iamsandeep82/service-app'
-#         command: 'buildAndPush'
-#         Dockerfile: '$(Build.SourcesDirectory)/service_app/Dockerfile'
-#         tags: '$(tag)'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-hub-registry'
+        repository: 'iamsandeep82/service-app'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/service_app/Dockerfile'
+        tags: '$(tag)'
 
 # CREATE DEPLOYMENT MODEL
 - stage: DEPLOYMENT
