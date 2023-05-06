@@ -15,7 +15,7 @@ variables:
 
 stages:
 # BUILD PATIENT-JAR PACKAGE
-- stage: BUILD_JAR_PACKAGE_$(tag)
+- stage: BUILD_PATIENT_JAR_PACKAGE
   displayName: Build patient-app jar-package_$(tag)
   jobs:
   - job: Build
@@ -54,7 +54,7 @@ stages:
         ArtifactType: 'Container'
 
 # BUILD SERVICE-JAR PACKAGE      
-- stage: BUILD_JAR_PACKAGE_$(tag)
+- stage: BUILD_SERVICE_JAR_PACKAGE
   displayName: Build service-app jar-package_$(tag)
   jobs:
   - job: Build
@@ -94,7 +94,7 @@ stages:
 
 
 # PATIENT-DOCKER-BUILD-PUSH
-- stage: BUILD_PUSH_DOCKER_IMAGE
+- stage: PATIENT_BUILD_PUSH_DOCKER_IMAGE
   displayName: Build-Patient-Docker-Image
   jobs:
   - job: Build
@@ -123,7 +123,7 @@ stages:
     
 
 # SERVICE-DOCKER-BUILD-PUSH
-- stage: BUILD_PUSH_DOCKER_IMAGE
+- stage: SERVICE_BUILD_PUSH_DOCKER_IMAGE
   displayName: Build-Service-Docker-Image
   jobs:
   - job: Build
