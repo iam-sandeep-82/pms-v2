@@ -26,11 +26,11 @@ spec:
         app: patient-app
     spec:
       containers:
-       - env:
-        - name: service-app-url
-          value: 0.0.0.0
       - name: patient-app
         image: iamsandeep82/patient-app
+        env:
+        - name: service-app-url
+          value: 0.0.0.0
         imagePullPolicy: IfNotPresent
         ports:
         - name: liveness-port
