@@ -1,6 +1,6 @@
 
 # ---- PATIENT-DEPLOY -----
-EXPOSE PORT -- 8080
+#EXPOSE PORT -- 8080
 
 apiVersion: apps/v1
 kind: Deployment
@@ -26,11 +26,11 @@ spec:
         app: patient-app
     spec:
       containers:
-       - env:
-        - name: service-app-url
-          value: 0.0.0.0
       - name: patient-app
         image: iamsandeep82/patient-app
+        env:
+        - name: service-app-url
+          value: service-cluster-service
         imagePullPolicy: IfNotPresent
         ports:
         - name: liveness-port
@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: patient-LB-service
+  name: patient-lb-service
   namespace: dynamo
   labels: #PODS
     app: patient-app
