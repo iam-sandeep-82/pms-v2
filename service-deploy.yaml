@@ -1,5 +1,5 @@
 # ---- SERVICE-DEPLOY -----
-EXPOSE PORT -- 8000
+#EXPOSE PORT -- 8000
 
 
 apiVersion: apps/v1
