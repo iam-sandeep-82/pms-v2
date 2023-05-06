@@ -10,7 +10,7 @@ metadata:
   name: service-app
   namespace: dynamo
 spec:
-  replicas: 1 #CHANGE
+  replicas: 15 #CHANGE
   minReadySeconds: 45
   selector:
     matchLabels:
