@@ -30,7 +30,7 @@ spec:
         image: iamsandeep82/patient-app
         env:
         - name: service-app-url
-          value: 0.0.0.0
+          value: service-cluster-service
         imagePullPolicy: IfNotPresent
         ports:
         - name: liveness-port
